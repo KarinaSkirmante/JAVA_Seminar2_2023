@@ -1,5 +1,5 @@
 package model;
 
 public enum CourseGradeType {
-	EXAM, TEST
+	EXAM, TEST, other
 }
