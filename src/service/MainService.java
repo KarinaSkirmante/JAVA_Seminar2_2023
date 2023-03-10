@@ -13,6 +13,12 @@ import model.Student;
 
 public class MainService {
 
+	
+	private static ArrayList<Student> allStudentsList = new ArrayList<>();
+	private static ArrayList<Professor> allProfessorList = new ArrayList<>();
+	private static ArrayList<Course> allCourseList = new ArrayList<>();
+	private static ArrayList<Grade> allGradesList = new ArrayList<>();
+	
 	public static void main(String[] args) {
 		int[] mas = new int[5];
 		
@@ -37,7 +43,7 @@ public class MainService {
 		{
 			System.out.println(allStudents[i]);
 		}
-		ArrayList<Student> allStudentsList = new ArrayList<>();
+		
 		allStudentsList.addAll(Arrays.asList(st1, st2, st3));
 		
 		for(Student temp : allStudentsList) {
@@ -56,7 +62,7 @@ public class MainService {
 
 		Professor pr3 = new Professor("Gaļina", "Hiļķeviča", Degree.phd);
 
-		ArrayList<Professor> allProfessorList = new ArrayList<>();
+		
 		allProfessorList.addAll(Arrays.asList(pr1, pr2, pr3));
 		
 		for(Professor temp : allProfessorList)
@@ -70,7 +76,7 @@ public class MainService {
 		Course c2 = new Course("Programmēšana tīmeklī JAVA", 4, CourseGradeType.EXAM, pr2);		
 		Course c3 = new Course("Diferencialvienādojumi", 2, CourseGradeType.EXAM, pr3);
 		Course c4 = new Course("Datu Struktūras un pamatalgoritmi", 2, CourseGradeType.EXAM, pr2);
-		ArrayList<Course> allCourseList = new ArrayList<>();
+	
 		allCourseList.addAll(Arrays.asList(c1, c2, c3, c4));
 		for(Course temp: allCourseList)
 		{
@@ -81,13 +87,44 @@ public class MainService {
 		Grade gr2 = new Grade(10, st2, c2);
 		Grade gr3 = new Grade(6, st3, c2);
 		Grade gr4  = new Grade(5, st2, c3);
-		
-		ArrayList<Grade> allGradesList = new ArrayList<>();
+
 		allGradesList.addAll(Arrays.asList(gr1, gr2, gr3, gr4));
+		for(Grade temp: allGradesList)
+		{
+			System.out.println(temp);
+		}
+		
+		System.out.println("-----------------------------------------");
+		for(Student temp : allStudentsList) {
+			System.out.println(temp.getName() + ": " + calculateAVGGrade(temp));
+		}
 		
 		
-		
-		
+	}
+	
+	private static float calculateAVGGrade(Student student)
+	{
+		if(student != null) {
+			float gradesSum = 0;
+			int gradesCounter = 0;
+			
+			for(Grade temp : allGradesList ) {
+				if(temp.getStudent().equals(student)) {
+					gradesSum += temp.getGrValue();
+					gradesCounter++;
+				}
+			}
+			//           int/ int -> int 
+			//           float/int -> float
+			//           int/float -> float
+			return gradesSum/gradesCounter;
+			
+			
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 }
