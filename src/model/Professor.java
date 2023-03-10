@@ -76,13 +76,14 @@ public Professor(String name, String surname, Degree degree) {
 	setSurname(surname);
 	setDegree(degree);
 }
+//4. toString
 @Override
 public String toString() {
 	return "Professor [id=" + id + ", name=" + name + ", surname=" + surname + ", degree=" + degree + "]";
 }
 	
 	
-//4. toString
+
 
 
 //5. additional functions
