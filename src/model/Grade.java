@@ -60,14 +60,33 @@ public class Grade {
 			course = new Course();
 		}
 	}
-	
-	
-	
-	
+		
 	//3.constructors
+	//no-args
+	public Grade()
+	{
+		setId();
+		setCourse(new Course());
+		setStudent(new Student());
+		setGrValue(0);
+		
+	}
+	
+	//args
+	public Grade(int grValue, Student student, Course course) {
+		setId();
+		setCourse(course);
+		setGrValue(grValue);
+		setStudent(student);
+	}
+	
 	
 	//4.toString
-	
+	public String toString()
+	{
+		return "" + id + ": " + student.getName() + " " + student.getSurname()
+		+ ", grade-> " + grValue + " (" + course.getTitle()+")";
+	}
 	//5.additional functions
 
 }
