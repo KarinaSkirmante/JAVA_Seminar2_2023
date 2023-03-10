@@ -67,11 +67,27 @@ public class Course {
 		}
 	}
 	
-
-	
-	
-	
 	//3.constructors
+	//no-args
+	public Course()
+	{
+		setId();
+		setTitle("Unknown");
+		setCreditPoints(0);
+		setType(CourseGradeType.other);
+		setProfessor(new Professor());
+	}
+	public Course(String title, int creditPoints, CourseGradeType type, Professor professor) {
+		setId();
+		setTitle(title);
+		setCreditPoints(creditPoints);
+		setType(type);
+		setProfessor(professor);
+	}
+	
+	//title, creditPOints, type, professor
+	
+	
 	//4. toString
 	//5. additional functions
 
