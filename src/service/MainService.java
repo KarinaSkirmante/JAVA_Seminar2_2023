@@ -58,9 +58,9 @@ public class MainService {
 		
 		Professor pr1 = new Professor();
 
-		Professor pr2 = new Professor("Karina", "Šķirmante", Degree.master);
+		Professor pr2 = new Professor("Karina", "Šķirmante", "121000-12345", Degree.master);
 
-		Professor pr3 = new Professor("Gaļina", "Hiļķeviča", Degree.phd);
+		Professor pr3 = new Professor("Gaļina", "Hiļķeviča", "121290-12345", Degree.phd);
 
 		
 		allProfessorList.addAll(Arrays.asList(pr1, pr2, pr3));
