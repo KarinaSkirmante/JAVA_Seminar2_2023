@@ -45,7 +45,7 @@ public Professor(String name, String surname, String personCode, Degree degree) 
 //4. toString
 @Override
 public String toString() {
-	return "" + id + ":" +super.toString() + ", " + degree;
+	return "PROFESSOR-" + id + ":" +super.toString() + ", " + degree;
 }
 	
 	

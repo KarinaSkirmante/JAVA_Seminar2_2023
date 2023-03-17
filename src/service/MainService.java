@@ -8,67 +8,41 @@ import model.CourseGradeType;
 import model.Degree;
 import model.Faculty;
 import model.Grade;
+import model.Person;
 import model.Professor;
 import model.Student;
 
 public class MainService {
 
 	
-	private static ArrayList<Student> allStudentsList = new ArrayList<>();
-	private static ArrayList<Professor> allProfessorList = new ArrayList<>();
+	//private static ArrayList<Student> allStudentsList = new ArrayList<>();
+	//private static ArrayList<Professor> allProfessorList = new ArrayList<>();
+	
+	private static ArrayList<Person> allPersons = new ArrayList<>();
 	private static ArrayList<Course> allCourseList = new ArrayList<>();
 	private static ArrayList<Grade> allGradesList = new ArrayList<>();
 	
 	public static void main(String[] args) {
-		int[] mas = new int[5];
-		
-		Professor[] allProfessors = new Professor[6];
-		Course[] allCourses = new Course[6];
-		Grade[] allGrades = new Grade[6];
-		
-		
-		
-		//TODO create 4 arrays and add all elements
-		//TODO using loop print out all elements 
 		Student st1 = new Student();
 		Student st2 = new Student("Jānis", "Bērziņš", Faculty.ITF, "121200-12345");
 		Student st3 = new Student("Līga", "Jaukā", Faculty.ITF, "121400-12345");
-		
-		Student[] allStudents = {st1, st2, st3};
-		for(Student temp : allStudents)
-		{
-			System.out.println(temp);
-		}
-		for(int i = 0; i < allStudents.length;i++)
-		{
-			System.out.println(allStudents[i]);
-		}
-		
-		allStudentsList.addAll(Arrays.asList(st1, st2, st3));
-		
-		for(Student temp : allStudentsList) {
-			System.out.println(temp);
-		}
-		for(int i = 0; i < allStudentsList.size();i++) {
-			System.out.println(allStudentsList.get(i));
-		}
-		
-		
-		
+		allPersons.addAll(Arrays.asList(st1, st2, st3));
 		
 		Professor pr1 = new Professor();
-
 		Professor pr2 = new Professor("Karina", "Šķirmante", "121000-12345", Degree.master);
-
 		Professor pr3 = new Professor("Gaļina", "Hiļķeviča", "121290-12345", Degree.phd);
-
+		allPersons.addAll(Arrays.asList(pr1, pr2, pr3));
 		
-		allProfessorList.addAll(Arrays.asList(pr1, pr2, pr3));
-		
-		for(Professor temp : allProfessorList)
-		{
-			System.out.println(temp);
+		System.out.println("----------------------------------------------");
+		for(Person temp : allPersons) {
+			System.out.println(temp.toString());
 		}
+		System.out.println("----------------------------------------------");
+		
+		
+		
+		
+		
 		
 		
 		
@@ -76,7 +50,7 @@ public class MainService {
 		Course c2 = new Course("Programmēšana tīmeklī JAVA", 4, CourseGradeType.EXAM, pr2);		
 		Course c3 = new Course("Diferencialvienādojumi", 2, CourseGradeType.EXAM, pr3);
 		Course c4 = new Course("Datu Struktūras un pamatalgoritmi", 2, CourseGradeType.EXAM, pr2);
-	
+
 		allCourseList.addAll(Arrays.asList(c1, c2, c3, c4));
 		for(Course temp: allCourseList)
 		{
@@ -95,8 +69,12 @@ public class MainService {
 		}
 		
 		System.out.println("-----------------------------------------");
-		for(Student temp : allStudentsList) {
-			System.out.println(temp.getName() + ": " + calculateAVGGrade(temp));
+		for(Person temp : allPersons) {
+			if(temp instanceof Student)
+			{
+				Student tempStudent = (Student)temp;
+				System.out.println(temp.getName() + ": " + calculateAVGGrade(tempStudent));
+			}
 		}
 		
 		System.out.println("-----------------------------------------");
@@ -105,21 +83,31 @@ public class MainService {
 		}
 		
 		System.out.println("-----------------------------------------");
-		for(Student temp : allStudentsList) {
-			System.out.println(temp.getName() + ": " + calculateWeightedAVGGrade(temp));
+		for(Person temp : allPersons) {
+			if(temp instanceof Student)
+			{
+				System.out.println(temp.getName() + ": " + calculateWeightedAVGGrade((Student)temp));
+			}
 		}
 		
 		System.out.println("-----------------------------------------");
-		for(Professor temp : allProfessorList) {
-			System.out.println(temp.getSurname() + ": " + calculateCourseCount(temp));
+		for(Person temp : allPersons) {
+			if(temp instanceof Professor) {
+			System.out.println(temp.getSurname() + ": " + calculateCourseCount((Professor)temp));
+			}
 		}
 		
 		System.out.println("-----------------------------------------");
-		for(Student temp : allStudentsList) {
-			System.out.println(temp);
+		ArrayList<Student> onlyStudents = new ArrayList<>();
+		for(Person temp : allPersons) {
+			if(temp instanceof Student)
+			{
+				System.out.println(temp);
+				onlyStudents.add((Student)temp);
+			}
 		}
 		
-		ArrayList<Student> sortedAllStudentList = sortStudents();
+		ArrayList<Student> sortedAllStudentList = sortStudents(onlyStudents);
 		System.out.println("-----------------------------------------");
 		for(Student temp : sortedAllStudentList) {
 			System.out.println(temp);
@@ -210,7 +198,7 @@ public class MainService {
 		}
 	}
 	
-	private static ArrayList<Student> sortStudents(){
+	private static ArrayList<Student> sortStudents(ArrayList<Student> allStudentsList){
 		ArrayList<Student> sortedStudents = new ArrayList<>();
 		
 		for(Student temp : allStudentsList) {

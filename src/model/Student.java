@@ -60,7 +60,7 @@ public class Student extends Person{
 	//4. toString
 	//0: Jānis Bērziņš, 121290-12345, ITF
 	public String toString() {
-		return ""+id+": "+super.toString() + ", " +faculty;
+		return "STUDENT-"+id+": "+super.toString() + ", " +faculty;
 	}
 	//5. additional functions
 }
