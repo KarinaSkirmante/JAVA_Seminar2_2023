@@ -85,7 +85,7 @@ public class MainService {
 		
 		Grade gr1 = new Grade();
 		Grade gr2 = new Grade(10, st2, c2);
-		Grade gr3 = new Grade(6, st3, c2);
+		Grade gr3 = new Grade(10, st3, c2);
 		Grade gr4  = new Grade(5, st2, c3);
 
 		allGradesList.addAll(Arrays.asList(gr1, gr2, gr3, gr4));
@@ -108,6 +108,23 @@ public class MainService {
 		for(Student temp : allStudentsList) {
 			System.out.println(temp.getName() + ": " + calculateWeightedAVGGrade(temp));
 		}
+		
+		System.out.println("-----------------------------------------");
+		for(Professor temp : allProfessorList) {
+			System.out.println(temp.getSurname() + ": " + calculateCourseCount(temp));
+		}
+		
+		System.out.println("-----------------------------------------");
+		for(Student temp : allStudentsList) {
+			System.out.println(temp);
+		}
+		
+		ArrayList<Student> sortedAllStudentList = sortStudents();
+		System.out.println("-----------------------------------------");
+		for(Student temp : sortedAllStudentList) {
+			System.out.println(temp);
+		}
+		
 		
 	}
 	
@@ -175,8 +192,49 @@ public class MainService {
 		}
 	}
 	
+	private static int calculateCourseCount(Professor professor) //String name, String surname
+	{
+		if(professor!=null) {
+			int courseCounter = 0;
+			
+			for(Course temp : allCourseList) {
+				if(temp.getProfessor().equals(professor)) {
+					courseCounter++;
+				}
+			}
+			return courseCounter;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 	
-	
+	private static ArrayList<Student> sortStudents(){
+		ArrayList<Student> sortedStudents = new ArrayList<>();
+		
+		for(Student temp : allStudentsList) {
+			sortedStudents.add(temp);
+		}
+		
+		for(int i = 0; i < sortedStudents.size();i++) {
+			for(int j = 0; j < sortedStudents.size();j++) {
+				float student1AVGGrade = calculateAVGGrade(sortedStudents.get(i));
+				float student2AVGGrade = calculateAVGGrade(sortedStudents.get(j));
+				
+				if(student1AVGGrade > student2AVGGrade) {
+					Student temp = sortedStudents.get(i);
+					sortedStudents.set(i, sortedStudents.get(j));
+					sortedStudents.set(j, temp);
+				}
+			}
+		}
+		
+		
+		
+		return sortedStudents;
+		
+	}
 	
 	
 }
